@@ -1,0 +1,49 @@
+{% extends 'list.html' %}
+{% block title %}
+    <title>show order by pagination</title>
+{% endblock %}
+{% block content %}
+<div class="card mb-3" style="max-width: 540px;">
+    {% for laptop in page_obj %}
+    <div class="row no-gutters">
+      <div class="col-md-4" style="width: 5%">
+        <img src="{{laptop.document.url}}" alt="...">
+      </div>
+      <div class="col-md-8">
+        <div class="card-body">
+          <h5 class="card-title">Laptop</h5>
+          <ul>
+            <li>Name-{{laptop.Modelname}}</li>
+            <li>Company-{{laptop.Company}}</li>
+            <li>Ram-{{laptop.Ram}}</li>
+            <li>Rom{{laptop.Rom}}</li>
+            <li>Weight{{laptop.Weight}}</li>
+            <li>Processor-{{laptop.Processor}}</li>
+        </ul>
+          
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+
+<div class="pagination">
+    <div class="step-links">
+        <span class="current" style="color:tomato;">
+            <b>Page {{obj.number}} of {{obj.paginator.num_pages}}</b>
+        </span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <span>
+            {% if obj.has_previous %}
+                <a href="{% url 'pagination' %}?page=1"><button class="btn btn-secondary">First</button></a>
+                <a href="{% url 'pagination' %}?page={{obj.previous_page_number}}"><button class="btn btn-secondary">Previous</button></a>
+            {% endif %}
+
+
+            {% if obj.has_next %}
+            <a href="{% url 'pagination' %}?page={{obj.next_page_number}}"><button class="btn btn-secondary">Next</button></a>
+            <a href="{% url 'pagination' %}?page={{obj.paginator.num_pages}}"><button class="btn btn-secondary">Last</button></a>
+            {% endif %}
+            </span>
+    </div>
+</div><br><br><br>
+{% endblock %}
